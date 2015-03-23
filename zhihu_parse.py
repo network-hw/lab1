@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 import requests
 import json
+import datetime
 from pyquery import PyQuery as P
 
 class Zhihu:
-    def __init__(self, begin_date = 20150301, end_date = 20150318):
-        self.begin_date = begin_date
-        self.end_date = end_date
-        self.url = "http://news.at.zhihu.com/api/1.2/news/before/%d"
+    def __init__(self):
+        self.date = datetime.datetime.now()
+        self.url = "http://news.at.zhihu.com/api/1.2/news/before/%s"
 
     def parse(self, date):
         headers = {
@@ -33,7 +33,7 @@ class Zhihu:
                 author = now('.answer .meta .author').text()
                 if author[-1] == u"，": author = author[:-1]
                 content_str = "Q: " + title + " A: " + content
-                item = {"content": content_str, "date": date, "author": author, "source": "zhihu"}
+                item = {"content": content_str, "date": date, "author": author, "source": "Zhihu", "logo": "zhihu.png"}
                 result.append(item)
         except:
             return result
@@ -41,8 +41,15 @@ class Zhihu:
         return result
 
     def run(self):
+        one_day_ago = datetime.timedelta(days=-1)
         result = []
-        for d in range(self.begin_date, self.end_date):
-            result = result + self.parse(d)
+        while True:
+            result = result + self.parse(self.date.strftime("%Y%m%d"))
+            if len(result) > 10: break
+            self.date += one_day_ago
+
         return result
 
+if __name__ == "__main__":
+    zhihu = Zhihu()
+    print zhihu.run()

@@ -13,25 +13,15 @@ $(document).ready(function() {
 
   var loading = false;
 
-  var dummyItem = {
-    content: "在半个世纪的政治生涯里，李光耀带领新加坡在30年内发展成为亚洲最富裕繁荣的国家之一，被誉为“新加坡国父”，是20世纪最成功的政治家之一。而在对华关系上，他既是中国人民的老朋友，一些时候又令我们心情复杂。", 
-    source: "Baidu",
-    logo: "zhihu.png"
-  };
-
   function retrieveItems(callback) {
-    /*
-    $.get("gimme/a/hug", function(items) {
+    $.get("/gimme_a_hug", function(items) {
+      items = eval(items);
       var newItems = [];
       for (var i = 0; i < items.length; i++) {
+        newItems[i] = genTextItem(items[i]);
       }
+      callback(newItems);
     });
-    */
-    var newItems = [];
-    for (var i = 0; i < 10; i++) {
-      newItems[i] = genTextItem(dummyItem);
-    }
-    setTimeout(function(){callback(newItems);}, 2000);
   };
 
   function onScroll() {
