@@ -3,7 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="underscore.js"></script>
+    <script type="text/javascript" src="handlebars.js"></script>
     <script type="text/javascript" src="wookmark.js"></script>
+    <script id="text-item-template" type="text/x-handlebars-template">
+    <div class="item new-item" style="opacity: 0"> 
+        <div class="img">
+        </div>
+        <div class="content">
+            <div class="inner-content">
+                {{content}}
+            </div>
+        </div>
+        <div class="footer"> 
+            <div class="footer-content">
+            <img class="source-logo" src="{{logo}}"> </img>
+            <div class="source">
+                <p> From {{source}} </p>
+            </div>
+            </div>
+        </div>
+    </div>
+    </script>
+    <script id="image-item-template" type="text/x-handlebars-template">
+    <div class="item"> 
+        <div class="img">
+            <img src="{{content}}"> </img>
+        </div>
+        <div class="footer"> 
+            <div class="footer-content">
+            <img class="source-logo" src="{{logo}}"> </img>
+            <div class="source">
+                <p> From {{source}} </p>
+            </div>
+            </div>
+        </div>
+    </div>
+    </script>
     <script type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" href="style.css"> </link>
     <title>Result | Vani</title>
@@ -172,6 +208,9 @@
         </div>
     </div>
     </div>
+    </div>
+    <div id="loading" style="display:none">
+        <img src="loading.gif"></img>
     </div>
 </body>
 </html>

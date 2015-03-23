@@ -39,9 +39,6 @@ body {
     font-weight: bold;
     border-top: 1px solid #e7e7e7;
     color: #777; }
-    .item .footer a:link a:visited a:hover a:active {
-      text-decoration: none;
-      color: #777; }
     .item .footer .footer-content {
       display: block;
       margin-left: 16px;
@@ -57,3 +54,11 @@ body {
         margin-left: 8px;
         line-height: 15px;
         display: inline-block; }
+
+#loading {
+  position: fixed;
+  right: 10px;
+  bottom: 10px; }
+  #loading img {
+    width: 100px;
+    height: 100px; }
