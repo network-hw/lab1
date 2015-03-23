@@ -6,30 +6,20 @@
     <script type="text/javascript" src="/static/vendor/underscore.js"></script>
     <script type="text/javascript" src="/static/vendor/handlebars.js"></script>
     <script type="text/javascript" src="/static/vendor/wookmark.js"></script>
-    <script id="text-item-template" type="text/x-handlebars-template">
+    <script id="item-template" type="text/x-handlebars-template">
     <div class="item new-item" style="opacity: 0"> 
+        {{#if image}}
         <div class="img">
+            <img src="{{image}}"> </img>
         </div>
+        {{/if}}
+        {{#if content}}
         <div class="content">
             <div class="inner-content">
                 {{content}}
             </div>
         </div>
-        <div class="footer"> 
-            <div class="footer-content">
-            <img class="source-logo" src="/static/image/{{logo}}"> </img>
-            <div class="source">
-                <p> From {{source}} </p>
-            </div>
-            </div>
-        </div>
-    </div>
-    </script>
-    <script id="image-item-template" type="text/x-handlebars-template">
-    <div class="item"> 
-        <div class="img">
-            <img src="{{content}}"> </img>
-        </div>
+        {{/if}}
         <div class="footer"> 
             <div class="footer-content">
             <img class="source-logo" src="/static/image/{{logo}}"> </img>
@@ -69,6 +59,10 @@
     <div class="item"> 
         <div class="img">
             <img src="/static/image/test.jpg"> </img>
+        </div>
+        <div class="content">
+        <div class="inner-content">
+        </div>
         </div>
         <div class="footer"> 
             <div class="footer-content">

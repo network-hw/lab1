@@ -1,7 +1,6 @@
 $(document).ready(function() {
   // Initialize template
-  var genTextItem = Handlebars.compile($('#text-item-template').html());
-  var genImageItem = Handlebars.compile($('#image-item-template').html());
+  var genItem = Handlebars.compile($('#item-template').html());
 
   var container = '#content', $container = $(container), $window = $(window), $document = $(document);
 
@@ -18,7 +17,7 @@ $(document).ready(function() {
       items = eval(items);
       var newItems = [];
       for (var i = 0; i < items.length; i++) {
-        newItems[i] = genTextItem(items[i]);
+        newItems[i] = genItem(items[i]);
       }
       callback(newItems);
     });
