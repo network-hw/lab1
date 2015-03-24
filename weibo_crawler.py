@@ -34,7 +34,7 @@ class WeiboFeedData:
         result['date'] = datetime.date.today().strftime("%Y%m%d")
         result['source'] = 'weibo'
         result['content'] = self.text
-        result['image-src'] = '/static/image/weibo/' + self.prev.split('/')[-1]
+        result['image-list'] = [{"image-src":'/static/image/weibo/' + self.prev.split('/')[-1]}]
         result['logo'] = 'weibo.jpg'
         return result
     def download_image(self):

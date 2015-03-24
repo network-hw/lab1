@@ -42,6 +42,8 @@ $(document).ready(function() {
           $('#loading').fadeOut(300);
           $(newItemsRef).animate({'opacity': 1}, 1000, function() {
             $(newItemsRef).removeClass('new-item');
+            wookmark.initItems();
+            wookmark.layout(true);
           });
         });
       });

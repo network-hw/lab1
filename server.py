@@ -1,11 +1,13 @@
 import os.path
 import cherrypy
 import json
+import random
 
 from zhihu_parse import Zhihu
 from weibo_crawler import WeiboCrawler
+from jiandan import Jiandan
 
-ACCEPTS = ["zhihu", "weibo"]
+ACCEPTS = ["zhihu", "weibo", "jiandan"]
 
 class Server:
     @cherrypy.expose
@@ -23,6 +25,9 @@ class Server:
             result += zhihu.run()
         if "weibo" in accepts:
             result += weibo.run()
+        if "jiandan" in accepts:
+            result += jiandan.run()
+        random.shuffle(result)
         return json.dumps(result, ensure_ascii=False)
 
 if __name__ == '__main__':
@@ -38,4 +43,5 @@ if __name__ == '__main__':
             }
     zhihu = Zhihu()
     weibo = WeiboCrawler()
+    jiandan = Jiandan()
     cherrypy.quickstart(Server(), "/", conf)

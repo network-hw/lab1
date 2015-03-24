@@ -8,11 +8,11 @@
     <script type="text/javascript" src="/static/vendor/wookmark.js"></script>
     <script id="item-template" type="text/x-handlebars-template">
     <div class="item new-item" style="opacity: 0"> 
-        {{#if image-src}}
+        {{#each image-list}}
         <div class="img">
             <img src="{{image-src}}"> </img>
         </div>
-        {{/if}}
+        {{/each}}
         {{#if content}}
         <div class="content">
             <div class="inner-content">
@@ -58,6 +58,7 @@
     </div>
     <div class="item"> 
         <div class="img">
+            <img src="/static/image/test.jpg"> </img>
             <img src="/static/image/test.jpg"> </img>
         </div>
         <div class="content">
