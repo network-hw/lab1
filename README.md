@@ -1,4 +1,17 @@
+# Usage
+安装依赖：
+    
+    sudo apt-get install pip
+    pip install requests
+    pip install rsa
+    pip install cherrpy
+   
+运行`server.py`运行服务器
 
+    cd lab1/
+    python server.py
+
+然后在浏览器中查看网页`127.0.0.1:8080`即可查看demo
 
 # 微博的爬虫设计
 
