@@ -27,14 +27,15 @@ class WeiboFeedData:
         self.tran = tran
         self.comm = comm
         self.date = date
+        self.weight = 0
     def show(self):
         result = {}
         # add weight
-        result['weight'] = int(self.like) * 0.35 + int(self.tran) * 0.45 + int(self.comm) * 0.2
+        result['weight'] = self.weight
         result['date'] = datetime.date.today().strftime("%Y%m%d")
         result['source'] = 'weibo'
         result['content'] = self.text
-        result['image-src'] = '/static/image/weibo/' + self.prev.split('/')[-1]
+        result['image-list'] = [{"image-src":'/static/image/weibo/' + self.prev.split('/')[-1]}]
         result['logo'] = 'weibo.jpg'
         return result
     def download_image(self):
@@ -81,15 +82,19 @@ class WeiboCrawler:
             comm = re_comm.search(comm_list[i].text).group(1)
             date = date_list[i].text.split(' ')[0]
             feed = WeiboFeedData(user, text, prev, full, like, tran, comm, date)
+            feed.weight = int(feed.like) * 0.35 + int(feed.tran) * 0.45 + int(feed.comm) * 0.2
             # Download file
             feed.download_image()
             self.feed_list.append(feed)
         return 0
+    def feed_cmp(self, a, b):
+        return int(b.weight - a.weight)
     def weibo_init_run(self):
         for feed in weibo_fun_feeds:
             # print "Fetching ...", feed[0], feed[1]
             feed_content = session.get(feed[0]).content
             self.weibo_parser_feed(feed_content)
+        self.feed_list = sorted(self.feed_list, cmp=self.feed_cmp)
     def weibo_login(self):
         # print "Logging in Weibo ..."
         login_status = wblogin(self.user_name, self.pass_word)
