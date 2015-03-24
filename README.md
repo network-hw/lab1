@@ -5,6 +5,7 @@
     pip install requests
     pip install rsa
     pip install cherrpy
+    pip install pyquery
    
 运行`server.py`运行服务器
 
@@ -107,4 +108,4 @@ server每次执行run，`WeiboCrawler`就会返回十条数据。
 
 # Demo展示
 
-使用`cherrpy`工具搭建了一个简易的服务器，然后前端使用`wookmark`框架，以及`handlebars`模板生成工具，将所有内容以瀑布流的方式展现给用户。每次刷新到页底的，向服务器获取数据，即使爬取新的数据即可。
+使用`cherrpy`工具搭建了一个简易的服务器，然后前端使用`wookmark`框架，以及`handlebars`模板生成工具，将所有内容以瀑布流的方式展现给用户。每次刷新到页底的，向服务器获取数据，即时爬取新的数据即可。
