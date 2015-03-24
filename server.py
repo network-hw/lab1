@@ -14,9 +14,9 @@ class Server:
 
     @cherrypy.expose
     def gimme_a_hug(self, accept=""):
-        if accept != "": 
-            accepts = accept.split(',') 
-        else: 
+        if accept != "":
+            accepts = accept.split(',')
+        else:
             accepts = ACCEPTS
         result = []
         if "zhihu" in accepts:
