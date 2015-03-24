@@ -49,6 +49,8 @@ $(document).ready(function() {
       });
     }
   };
+
+  onScroll()
   
   // Capture scroll event.
   $window.bind('scroll.wookmark', onScroll);
