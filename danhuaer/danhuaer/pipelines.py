@@ -10,7 +10,7 @@ class DanhuaerPipeline(object):
     def __init__(self):
         self.mfile = open('test.html', 'w')
     def process_item(self, item, spider):
-        text = '<img src="' + item['url'] + '" alt = "" />'
+        text = "{'image-list':[{'image-src':'%s'}], 'source': 'Danhuaer', 'logo': 'danhua.jpg'},\n"%(item['url'])
         self.mfile.writelines(text)
     def close_spider(self, spider):
         self.mfile.close()

@@ -7,9 +7,12 @@ from zhihu_parse import Zhihu
 from weibo_crawler import WeiboCrawler
 from jiandan import Jiandan
 
-ACCEPTS = ["zhihu", "weibo", "jiandan"]
+ACCEPTS = [ "zhihu", "weibo", "jiandan", "danhuaer"]
 
 class Server:
+    def __init__(self):
+        self.danhuaer_index = 0;
+
     @cherrypy.expose
     def index(self):
         return cherrypy.lib.static.serve_file(os.path.join(current_dir, "demo", "index.html"));
@@ -23,11 +26,14 @@ class Server:
         result = []
         if "zhihu" in accepts:
             result += zhihu.run()
-        if "weibo" in accepts:
-            result += weibo.run()
         if "jiandan" in accepts:
             result += jiandan.run()
+        if "danhuaer" in accepts:
+            result += danhuaer_data[self.danhuaer_index:self.danhuaer_index+5]
+            self.danhuaer_index += 10
         random.shuffle(result)
+        if "weibo" in accepts:
+            result += weibo.run()
         return json.dumps(result, ensure_ascii=False)
 
 if __name__ == '__main__':
@@ -44,4 +50,5 @@ if __name__ == '__main__':
     zhihu = Zhihu()
     weibo = WeiboCrawler()
     jiandan = Jiandan()
+    danhuaer_data = eval(open("danhuaer.db", "r").read())
     cherrypy.quickstart(Server(), "/", conf)
