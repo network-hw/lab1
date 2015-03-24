@@ -30,7 +30,7 @@ class WeiboFeedData:
     def show(self):
         result = {}
         # add weight
-        result['weight'] = int(self.like) * 0.2 + int(self.tran) * 0.3 + int(self.comm) * 0.5
+        result['weight'] = int(self.like) * 0.35 + int(self.tran) * 0.45 + int(self.comm) * 0.2
         result['date'] = datetime.date.today().strftime("%Y%m%d")
         result['source'] = 'weibo'
         result['content'] = self.text
