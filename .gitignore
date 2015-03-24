@@ -58,3 +58,6 @@ target/
 
 .DS_Store
 .sass-cache/
+
+log
+demo/image/weibo/

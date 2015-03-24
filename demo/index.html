@@ -8,9 +8,9 @@
     <script type="text/javascript" src="/static/vendor/wookmark.js"></script>
     <script id="item-template" type="text/x-handlebars-template">
     <div class="item new-item" style="opacity: 0"> 
-        {{#if image}}
+        {{#if image-src}}
         <div class="img">
-            <img src="{{image}}"> </img>
+            <img src="{{image-src}}"> </img>
         </div>
         {{/if}}
         {{#if content}}
@@ -202,6 +202,7 @@
             <div class="footer-content">
             <img class="source-logo" src="/static/image/zhihu.png"> </img>
             <div class="source">
+                <p> Author: vani </p>
                 <p> From Zhihu </p>
             </div>
             </div>

@@ -23,7 +23,8 @@ body {
     margin-bottom: 3px; }
     .item .img img {
       width: 236px;
-      border-radius: 6px 6px 0 0; }
+      border-radius: 6px 6px 0 0;
+      clip: rect(0px, 236px, 320px, 0px); }
   .item .content {
     position: relative;
     display: block; }

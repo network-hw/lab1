@@ -3,6 +3,7 @@ import cherrypy
 import json
 
 from zhihu_parse import Zhihu
+from weibo_crawler import WeiboCrawler
 
 ACCEPTS = ["zhihu", "weibo"]
 
@@ -20,6 +21,8 @@ class Server:
         result = []
         if "zhihu" in accepts:
             result += zhihu.run()
+        if "weibo" in accepts:
+            result += weibo.run()
         return json.dumps(result, ensure_ascii=False)
 
 if __name__ == '__main__':
@@ -34,4 +37,5 @@ if __name__ == '__main__':
                 }
             }
     zhihu = Zhihu()
+    weibo = WeiboCrawler()
     cherrypy.quickstart(Server(), "/", conf)

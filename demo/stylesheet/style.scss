@@ -28,6 +28,7 @@ $item-width: 236px;
     img {
       width: $item-width;
       border-radius: 6px 6px 0 0;
+      clip: rect(0px, 236px, 320px, 0px);
     }
   }
   .content {

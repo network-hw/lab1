@@ -29,32 +29,33 @@ class WeiboFeedData:
         self.date = date
     def show(self):
         result = {}
-        result['date'] = datetime.date.today()
+        result['date'] = datetime.date.today().strftime("%Y%m%d")
         result['source'] = 'weibo'
         result['content'] = self.text
-        result['image-src'] = './image/' + self.prev.split('/')[-1]
+        result['image-src'] = '/static/image/weibo/' + self.prev.split('/')[-1]
+        result['logo'] = 'weibo.jpg'
         return result
     def download_image(self):
-        path = './image/' + self.prev.split('/')[-1]
+        path = './demo/image/weibo/' + self.prev.split('/')[-1]
         if os.path.isfile(path) == False:
             response = requests.get(self.prev, stream=True)
-            print 'Downloading', path, '...'
+            # print 'Downloading', path, '...'
             with open(path, 'wb') as out_file:
                 shutil.copyfileobj(response.raw, out_file)
             del response
 
 class WeiboCrawler:
-    def __init__(self, username, password):
+    def __init__(self):
         self.feed_list = []
-        self.user_name = username
-        self.pass_word = password
+        self.user_name = "echo02200059@sina.cn"
+        self.pass_word = "networklab"
         self.curr_pace = 0
         self.init      = 0
     def weibo_parser_feed(self, feed_content):
         if feed_content == None or feed_content == []:
             print "Error: Empty Parameter"
             exit(1)
-        print feed_content
+        # print feed_content
         d = pq(feed_content)
         user_list = d('div.c div a.nk')
         text_list = d('div.c div span.ctt')
@@ -84,11 +85,11 @@ class WeiboCrawler:
         return 0
     def weibo_init_run(self):
         for feed in weibo_fun_feeds:
-            print "Fetching ...", feed[0], feed[1]
+            # print "Fetching ...", feed[0], feed[1]
             feed_content = session.get(feed[0]).content
             self.weibo_parser_feed(feed_content)
     def weibo_login(self):
-        print "Logging in Weibo ..."
+        # print "Logging in Weibo ..."
         login_status = wblogin(self.user_name, self.pass_word)
         return check_login_status(login_status)
     def run(self):
@@ -113,10 +114,10 @@ class WeiboCrawler:
 
 
 if __name__ == '__main__':
-    if len(sys.argv[1:]) < 2:
-        print "Usage: %s [username] [password]" % sys.argv[0]
-        exit(1)
+    # if len(sys.argv[1:]) < 2:
+     #   print "Usage: %s [username] [password]" % sys.argv[0]
+     #   exit(1)
 
-    crawler = WeiboCrawler(sys.argv[1], sys.argv[2])
+    crawler = WeiboCrawler()
     for i in xrange(20):
         print 'result: ', crawler.run()

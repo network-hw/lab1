@@ -80,7 +80,7 @@ def check_login_status(login_status):
     return login_json[0]
 
 if __name__ == '__main__':
-    print(json.dumps(wblogin('rz940303@gmail.com', 'mima484860'), ensure_ascii=False))
+    print(json.dumps(wblogin('rz940303@gmail.com', ''), ensure_ascii=False))
 
     # timeline
     print(session.get('http://weibo.com/topgirls8').text)
