@@ -54,3 +54,44 @@ server每次执行run，`WeiboCrawler`就会返回十条数据。
 因此最后的权值计算是:
 
     赞数 * 0.35 + 转发数 * 0.45 + 评论数 * 0.2
+
+# 蛋花网爬虫策略
+
++ 建立scrapy项目：scrapy startproject danhuaer
+
++ 定义Item：在items.py中定义要爬取的数据。因为只爬取了图片所以只有url = scrapy.Field()
+
++ 实现spider：在项目文件夹下的spiders文件夹中新建一个python文件，danhuaerspider.py。Spider是一个继承自scrapy.contrib.spiders.CrawlSpider的python类。有三个必须定义的成员：
+
+		name：spider的标示；
+		start_urls：spider开始抓取的网页；
+		parse(): 负责解析并匹配抓取的数据，解析为item
+	
+
+在danhuaerspider.py中，爬虫允许的领域allowed\_domains限制在danhuaer.com中。
+
+爬虫的起始位置为http://danhuaer.com/?o=top 在这个网页上有很多图片的链接，每个链接都为http://danhuaer.com/t/xxxxxx格式，所以利用正则表达式，设定规则
+
+	rules = (Rule(SgmlLinkExtractor(allow=('/t/\d*'),callback = 'parse_img',follow=True),) 
+	
+即会对所有符合规则的网页进行爬取，调用parse_img处理。
+
++ parse\_img是要将所需要的内容提取出来。查看蛋花儿网页面源代码可知需要提取的图片在<div class = “post-container”> 中，图片链接在src=”http://xxxxxx.jpg”中。所以用xpath将src=的链接提取出来，结果存储到urlItem中。
+
++ pipelines.py文件是关于爬取的内容存储的。item['url']是爬取出的图片的链接。
+
+# 知乎日报爬虫策略
+
+利用Chrome的开发者工具获知乎日报的API为，且没有加密验证
+
+	http://news.at.zhihu.com/api/1.2/news/before/date
+	
+于是直接利用python的`requests`包，模拟浏览器发送请求，获取`json`格式结果即可。
+
+# 煎蛋爬虫策略
+
+与知乎日报类似，使用`requests`包模拟浏览器请求，然后对结果进行正则表达式匹配即可
+
+# Demo展示
+
+使用`cherrpy`工具搭建了一个简易的服务器，然后前端使用`wookmark`框架，以及`handlebars`模板生成工具，将所有内容以瀑布流的方式展现给用户。每次刷新到页底的，向服务器获取数据，即使爬取新的数据即可。
